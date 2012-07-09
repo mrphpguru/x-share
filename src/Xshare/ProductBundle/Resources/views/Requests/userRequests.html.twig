@@ -1,0 +1,81 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "My requests"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/product.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+    {% if pager.hasResults() %}
+        <h3 class="header">{{ "My requests"|trans }}</h3>
+        <div class="entity-block-list">
+        <div class="filters" id="requests">
+            <div class="filter filter-category fright">
+               {%if orderby == 0 %}
+                <a class="desc"  href="{{ path('xshare_users_requests_page', {'orderby': 1, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Date"|trans }}</a>
+               {% elseif orderby == 1 %}
+                    <a class="asc" href="{{ path('xshare_users_requests_page', {'orderby': 0, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Date"|trans }}</a>
+               {%else%}
+                    <a href="{{ path('users_products_requests_page', {'orderby': 0, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Date"|trans }}</a>
+               {%endif%}
+            </div>
+        </div>
+        <div class="clear"></div>
+            <div class="requested-product-details">
+                <ul>
+                    {% set lastproduct = -1 %}
+
+                    {% for request in pager.getResults %}
+                        {% set closeli=false%}
+                        {% if lastproduct != request.getProduct.getProductId %}
+                            {% set lastproduct = request.getProduct.getProductId %}
+                           {%if lastproduct!=-1%}
+                            </li>
+                           {%else%}
+                            {% set closeli=true %}
+                           {%endif%}
+                           <li class="requests-group">
+                            <div class="product-info">
+                                <a class="product-link" href="{{ path('xshare_show_product', {'pid': request.getProduct.getProductId}) }}" >{{ request.getProduct.getName }}</a>
+                                (<a class="category-link" href="{{ path('product_category_show', {'id': request.getProduct.getCategory.getCategoryId}) }}" >{{ request.getProduct.getCategory.getName }}</a>)
+                            </div>
+                        {% endif %}
+                                <ul class="entity-loans">
+                                    <li class="loan-details large {%if request.getBookingId is not null and request.getRealReturnDate is not null%} returned {% elseif request.getBookingId is not null%} accepted {%endif%}">
+                                        <div class="entity-loan-date">
+                                            <strong><span class="request-status">{%if request.getBookingId is not null and request.getRealReturnDate is not null%} {{"returned"|trans}} {% elseif request.getBookingId is not null%} {{"accepted"|trans}} {%else%} {{"pending"|trans}} {%endif%}</span></strong>
+                                            {{ request.getBorrowDate|date('j') ~ ' ' ~ request.getBorrowDate|date('F')|trans|lower ~ ' ' ~ request.getBorrowDate|date('Y') ~ ' - ' ~ request.getReturnDate|date('j') ~ ' ' ~ request.getReturnDate|date('F')|trans|lower ~' '~ request.getReturnDate|date('Y') }}
+                                        </div>
+                                        <div class="entity-loan-user-link" style="float:right;">
+                                            {{ "to"|trans ~ ' '}}
+                                            <a href="{{ path('user_details', {'id': request.getProduct.getUser.getUserId }) }}">{{ request.getProduct.getUser.getFirstName ~ ' ' ~ request.getProduct.getUser.getLastName }}</a>
+                                            {% if request.getProduct.getUser.getSex == 'm' %}
+                                                <img src="{{ asset('images/user.png') }}" />
+                                            {% else %}
+                                                <img src="{{ asset('images/user_woman.png') }}" />
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            <div class="clear"></div>
+                       {% if closeli %}
+                            </li>
+                       {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        {{ "There are no requests!"|trans }}
+    {% endif %}
+    <div class="clear"></div>
+    <div class="pager-loans">
+        <div class="clear"></div>
+        {% if pager.isPaginable %}
+            {{ paginate(pager, 'xshare_users_requests_page',block_length, {'orderby':orderby}) }}
+        {% endif %}
+    </div>
+{% endblock %}

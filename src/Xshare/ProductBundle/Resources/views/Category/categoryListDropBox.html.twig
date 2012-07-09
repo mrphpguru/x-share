@@ -1,0 +1,17 @@
+<div class="categrories-list-block">
+    <form action="{{ path('category_redirect') }}" method="get" {{ form_enctype(form) }} id="categories-select">
+        {{ form_label(form.category,"Categories"|trans) }}
+        {{ form_widget(form.category) }}
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    /* categories drop down list related  functionality */
+    $('#categories-select select').change(function(){
+        if ($('#categories-select select').val() > 0) {
+            $('#categories-select').submit();
+        }
+    });
+    
+</script>

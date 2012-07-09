@@ -1,0 +1,119 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Products list"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/product.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+<h2 class="header" id="products-list-header">{{"Products list"|trans}}</h2>
+<div class="filters">
+    <ul class="filter filter-category fright">
+        <li id="filter-date">
+            {%if orderby == 0 %}
+                <a class="desc"  href="{{ path('all_products_list_page', {'orderby': 1, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Date"|trans }}</a>
+            {% elseif orderby == 1 %}
+                <a class="asc" href="{{ path('all_products_list', {'orderby': 0, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Date"|trans }}</a>
+            {%else%}
+                <a href="{{ path('all_products_list', {'orderby': 0, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Date"|trans }}</a>
+            {%endif%}
+                        </li><span class="delimiter">&nbsp;|&nbsp;</span>
+        <li id="filter-title">
+            {%if orderby == 21 %}
+                <a class="desc"  href="{{ path('all_products_list_page', {'orderby': 22, 'page':page}) }}" title="{{"Descending sort"|trans}}" >{{ "Title"|trans }}</a>
+            {% elseif orderby == 22 %}
+                <a class="asc" href="{{ path('all_products_list_page', {'orderby': 21, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Title"|trans }}</a>
+            {%else%}
+                <a href="{{ path('all_products_list_page', {'orderby': 21, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Title"|trans }}</a>
+            {%endif%}
+                        </li><span class="delimiter">&nbsp;|&nbsp;</span>
+        <li id="filter-category">
+            {%if orderby == 31 %}
+                <a class="desc"  href="{{ path('all_products_list_page', {'orderby': 32, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Category"|trans }}</a>
+            {% elseif orderby == 32 %}
+                <a class="asc" href="{{ path('all_products_list_page', {'orderby': 31, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Category"|trans }}</a>
+            {%else%}
+                <a href="{{ path('all_products_list_page', {'orderby': 31, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Category"|trans }}</a>
+            {%endif%}
+        </li><span class="delimiter">&nbsp;|&nbsp;</span>
+        <li id="filter-username">
+            {%if orderby == 41 %}
+                <a class="desc"  href="{{ path('all_products_list_page', {'orderby': 42, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "User"|trans }}</a>
+            {% elseif orderby == 42 %}
+                <a class="asc" href="{{ path('all_products_list_page', {'orderby': 41, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "User"|trans }}</a>
+            {%else%}
+                <a href="{{ path('all_products_list_page', {'orderby': 41, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "User"|trans }}</a>
+            {%endif%}
+        </li>
+        </li><span class="delimiter">&nbsp;|&nbsp;</span>
+        <li id="filter-loanded">
+            {%if orderby == 51 %}
+                <a class="desc"  href="{{ path('all_products_list_page', {'orderby': 52, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Status"|trans }}</a>
+            {% elseif orderby == 52 %}
+                <a class="asc" href="{{ path('all_products_list_page', {'orderby': 51, 'page':page}) }}" title="{{"Ascending sort"|trans}}" >{{ "Status"|trans }}</a>
+            {%else%}
+                <a href="{{ path('all_products_list_page', {'orderby': 51, 'page':page}) }}" title="{{"Descending sort"|trans}}">{{ "Status"|trans }}</a>
+            {%endif%}
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<br/>
+<div class="category-list" id="allproducts">
+    <div class="product-items-continer" >
+            <div class="clear"></div>
+
+                    {% for product in pager.getResults %}
+                    <div class="product-item">
+                        <table cellspacing="0" cellpadding="0" >
+                            <tr>
+                                <td>
+                                    <div class="product-info fleft">
+                                    <img src="/uploads/categories/{{product['category']['image']}}" width="20px" height="20px" >
+                                    <a class="category-link" href="{{path('product_category_show',{ 'id':product['category']['category_id'] })}}" >{{product['category']['name']}}</a>
+                                    - <a class="product-link" href="{{path('xshare_show_product',{ 'pid':product['product_id'] })}}" >{{product['name'] }}</a> ,
+                                    </div>
+                                    <div class="entity-added">
+                                        {% trans %}added by{% endtrans %} {{ product['user']['username'] }}
+                                        <a href="{{ path('user_details', {'id': product['user']['user_id'] }) }}" class="user-image">
+                                            {% if(product['user']['sex'] == 'm') %}
+                                                <img src="{{ asset('images/user.png') }}" />
+                                            {% else %}
+                                                <img src="{{ asset('images/user_woman.png') }}" />
+                                            {% endif %}
+                                        </a>
+                                        {% trans %} at {% endtrans %} {{product['created_at']|date('d-m-Y')}}
+                                    </div>
+                                        &nbsp;
+                                    <td width="3%"  align="right" valign="middle" >
+                          {% if app.user is not null%}
+
+                            {%set sesuserid = app.user.getUserId() %}
+                            {% if product['user']['user_id'] != sesuserid %}
+                                <a class="loan-popup-class" id="loan_popup" data-fancybox-type="ajax" href="{{path("xshare_ajax_loan",{'pid':product.product_id})}}" title="{{ "Loan now"|trans }}" >
+                                    <img src="{{ asset('images/request.png') }}" /></a>
+                            {%endif%}
+                          {%else%}
+                                <a class="loan-popup-class" href="{{path("user_registration")}}" title="{{ "Loan now"|trans }}"><img src="{{ asset('images/request.png') }}" /></a>
+                          {%endif%}
+                                </td>
+                                <td width="3%" align="right" valign="middle" >
+                                    {% set status = product['status']?"available":"loaned" %}
+                                    <span class="{{status}}" title="{{status|trans}}" >&nbsp;</span>
+                            </tr>
+                        </table>
+                    </div>
+                    {% endfor %}
+
+                    {% if pager.isPaginable %}
+                        {{ paginate(pager, 'all_products_list_page', block_length, {'orderby':orderby}) }}
+                    {% endif %}
+            </div>
+    </div>
+</div>
+
+
+{% endblock %}

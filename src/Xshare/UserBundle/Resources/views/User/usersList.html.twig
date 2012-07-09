@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Users list"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareuser/css/users.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+    <!-- filters -->
+    <div class="filters">
+        <ul>
+            <li>
+            {% if filter.sort == 'username' %}
+                    {% if filter.order == 'asc' %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'username', order: 'desc' }) }}">
+                    {{ "By username" | trans }} <span class="arrow asc"></span>
+                </a>
+                    {% else %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'username', order: 'asc' }) }}">
+                    {{ "By username" | trans }} <span class="arrow desc"></span>
+                </a>
+                    {% endif %}
+            {% else %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'username'}) }}">{{ "By username" | trans }} </a>
+            {% endif %}
+            </li>
+            <li>
+            {% if filter.sort == 'products' %}
+                {% if filter.order == 'asc' %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'products', order: 'desc' }) }}">
+                    {{ "By products" | trans }} <span class="arrow asc"></span>
+                </a>
+                {% else %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'products', order: 'asc' }) }}">
+                    {{ "By products" | trans }} <span class="arrow desc"></span>
+                </a>
+                {% endif %}
+            {% else %}
+                <a href="{{ path('all_users_list', { 'page': page, 'sort': 'products' }) }}">{{ "By products" | trans }}</a>
+            {% endif %}
+            </li>
+        </ul>
+    </div>
+    <!-- users list -->
+    {% include 'XshareUserBundle:User:userListItems.html.twig' with { 'paginator' : paginator } %}
+    {% if paginator.isPaginable %}
+        {{ paginate(paginator, 'all_users_list', usersLimit, {'page': page, 'sort': sort, 'order': order}) }}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ asset('bundles/xsharesecurity/css/registration.css') }}" type="text/css"/>
+    </head>
+    <body>
+        <div class="forgot_email" >
+        <p>{% trans %}Hello{% endtrans %},&nbsp;{{ loan.getUser().getFirstname() }}<br/>
+        {% trans %}Your loan request has been accepted{% endtrans %}.</p>
+        <i>{% trans %}These are the request details{% endtrans %}:</i>
+        <br />
+        <i>{% trans %}Product name{% endtrans %}:</i>&nbsp;<b>{{ loan.getProduct.getName() }}</b>
+        <br/>
+        <i>{% trans %}Loan period{% endtrans %}:</i>&nbsp;<b>{{ loan.borrowdate|date('d/m/Y') }}&nbsp;-&nbsp;{{ loan.returndate|date('d/m/Y') }}</b>
+        </div>
+    </body>
+</html>

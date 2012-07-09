@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Category's products"|trans }}{% endblock %}
+
+{% block maincontent %}
+    <h3 class="header" id="all-products-for-category">{{ "All products in category"|trans }}</h3>
+    <div class="products-block" id="all-products-for-category">
+{% for product in pager.getResults() %}
+        {% set id = product['product_id'] %}
+        <div class="products-block-entity">
+                <div class="products-block-entity-image">
+                    {% if product['status'] == 1 %}
+                        <span class="available">&nbsp;</span>
+                    {% else %}
+                        <span class="loaned">&nbsp;</span>
+                    {% endif %}
+                    <img src="/uploads/product/{{ product['image'] }}"  />
+                </div>
+                <div class="products-block-entity-details">
+                    <div>
+                        <a class="liensRouge" href="{{ path('xshare_show_product', {'pid' : product['product_id']}) }}">{{ helper.cutLongText(product['name'],50,"...") }}</a>
+                    </div>
+                    <div>
+                        {{ "Category"|trans }}&nbsp;-&nbsp;
+                        <span class="strong-text">{{ product['category_name'] }}</span>
+                    </div>    
+                    <div>
+                        {{ "Added by"|trans }}:&nbsp;
+                        <span class="strong-text">
+                            <a href="{{ path('user_details', { 'id' : product['user_id']}) }}">{{ product['username'] }}</a>
+                        </span>
+                    </div>
+                    <div>
+                        {{ "Added at"|trans }}:&nbsp;
+                        <span class="strong-text">{{ product['created_at']|date('j') }}&nbsp;{{ product['created_at']|date('F')|trans|lower }}&nbsp;{{ product['created_at']|date('Y') }}</span>
+                    </div>
+                    <div>
+                      {{ "Popularity"|trans }}:&nbsp;
+                      <span class="strong-text">{{ product['loans'] }}</span>
+                    </div>     
+                    &nbsp;
+                    {% if app.user is not null%}
+                        {%set sesuserid = app.user.getUserId() %}
+                        {% if product['user_id'] != sesuserid %}               
+                            <a class="loan-popup-class" id="loan_popup" data-fancybox-type="ajax" href="{{path("xshare_ajax_loan",{'pid':product['product_id']})}}" >{{ "Loan now"|trans }}</a>
+                        {%endif%} 
+                    {%else%}              
+                        <a class="loan-popup-class" href="{{path("user_registration")}}" >{{ "Loan now"|trans }}</a>         
+                    {%endif%}     
+                    {% if ((product['status'] == 0) and (prod_available[id] != null)) %}
+                        <div>
+                            {% set count = prod_available[id] %}
+                                {{ "Available in"|trans ~ ' ' }}
+                                <span class="strong-text">
+                                    {{ count }}
+                                    {% transchoice count %}
+                                        {1} day|]2,Inf] days
+                                    {% endtranschoice %}
+                                </span>    
+                        </div>
+                    {% endif %}     
+                </div>
+        </div>
+    {% else %}
+        <p>{{ "Category is empty" |trans }}</p>
+    {% endfor %}
+        
+    </div>
+    <div class="clear"></div>
+
+    {% if pager.isPaginable %}
+        {{ paginate(pager, 'category_all_products_list', items_limit, {'page' : page, 'id' : category}) }}
+    {% endif %}
+
+{% endblock %}

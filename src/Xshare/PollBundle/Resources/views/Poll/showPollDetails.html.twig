@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Poll details"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/xsharepoll/css/poll.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+{%if poll|length >0 %}    
+<h2>{{"Poll Details"|trans}}</h2>
+<div class="entity-show">
+    <h3>{{poll.getQuestion}}</h3>
+    <div class="poll-body">
+        {%if poll.getArrayAnswers is not iterable %}
+                {{"No options"|trans}}
+        {% else %}   
+            {% for answer in poll.getArrayAnswers%}
+                {%if poll.getPollResults is iterable%}
+                {% set nr = 0 %}
+                {% for pollresult in poll.getPollResults%}
+                   {%if answer == pollresult.getPollValue %}
+                        {% set nr = nr+1 %}
+                   {%endif%}
+                {%endfor%}
+                {%endif%}
+             <p>{{answer}} - {%if nr == 1 %} {{"one vote"|trans}} {% else %}{{nr}} {{"votes"|trans}}{%endif%}</p>
+            {%endfor%}
+        {%endif%}    
+    </div>
+    <div class="entity-options">
+       <a href="{{path("xshare_new_poll")}}" class="clear-form">{{"New Poll"|trans}}</a>
+       <a href="{{path("xshare_edit_poll",{"id":poll.pollid})}}" class="clear-form" >{{"Edit Poll"|trans}}</a>
+       <a href="{{path("xshare_delete_poll",{"id":poll.pollid})}}" onclick="return confirm('{{"Are you sure do you want to delete this poll"|trans}}?')" class="clear-form">{{"Delete"|trans}}</a>
+    </div>
+    <a class="fright" href="{{path("xshare_poll_list_first")}}">{{"Polls List"|trans}}</a>
+    <div class="clear"></div>
+</div>
+{%endif%}
+{% endblock %}

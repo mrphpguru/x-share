@@ -1,0 +1,148 @@
+.entity-details {
+    margin-right: 10px;
+    width: 58%;
+}
+
+.user-details {
+    background-color: #F0F4FC;
+    border: 1px solid #E0EAF8;
+}
+
+.entity-block-list .entity {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 46%;
+}
+
+.entity-block-list .requests-list .entity {
+    margin-bottom: 10px;
+}
+
+.user-details .entity-image img {
+    border: 1px solid #E2E2E2;
+    left: 10px;
+    max-width: 75px;
+    position: relative;
+    top: 10px;
+}
+
+.loan-actions a {
+    text-decoration: underline;
+    padding: 5px;
+}
+
+.loan-actions a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loan-result-message {
+    background-color: #F0F4FC;
+    border: 1px solid #E0EAF8;
+}
+
+.close, .hide {
+    background: url("../images/close.png") no-repeat scroll right center transparent;
+    float: right;
+    height: 16px;
+    margin-right: 4px;
+    padding: 4px;
+    width: 16px;
+}
+
+.close:hover, .hide:hover {
+    cursor: pointer;
+}
+
+.loan-result-message .message {
+    margin: 10px 0 10px 10px;
+}
+
+.recived-data{
+    text-align:right;
+    padding-top:10px;
+}
+
+#loading-gif{
+    vertical-align: top;
+    text-align:right;
+    display:none;
+}
+
+.product-add .clear-form {
+    padding: 5px 5px 4px;
+}
+
+.user-image {
+    text-decoration: none;
+}
+
+#allproducts.category-list {
+    border: 0 none;
+}
+
+h2.header {
+    padding-left: 25px;
+}
+
+.entity-loans li.loan-details {
+    background-color: #E0EAF8;
+    border: 1px solid #387CE2;
+    margin: 2px 0;
+    padding: 5px;
+    float: left;
+}
+
+.partial {
+    width: 85%;
+}
+
+.large {
+    width: 98%;
+}
+
+.entity-loans li.loan-actions {
+    width: 12%;
+    float:right;
+}
+
+.loan-details .entity-loan-date {
+    float: left;
+    color: #387CE2;
+    font-size: 12px;
+} 
+
+.entity-loan-user-link a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.entity-loan-user-link a:hover {
+    text-decoration: underline;
+}
+
+.requests-list {
+    padding-top: 10px; 
+}
+
+.requests-group {
+    padding-bottom: 20px;
+}
+
+product-info {
+    padding: 10px 0px;
+}
+
+.ui-accordion-content {
+    padding: 0.5em 1em;
+}
+
+.ui-accordion .requests-number {
+    color: #387CE2;
+}
+
+.ui-accordion .category-name {
+    color: #FF4200;
+    font-weight: bold;
+}

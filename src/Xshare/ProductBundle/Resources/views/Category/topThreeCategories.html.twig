@@ -1,0 +1,30 @@
+<h2 class="top-header">{{ "Top categories"|trans }}</h2>
+<div class="top-categories">
+     {% for category in categories %}
+     <div class="entity">
+            <div class="top-categories-entity-image">
+                <a href="{{ path('product_category_show', {'id' : category['category_id']}) }}">
+                    <img src="/uploads/categories/{{ category['image'] }}" />
+                </a>
+            </div>
+            <div class="top-categories-entity-details">
+                <div>
+                    <a class="liensRouge" href="{{ path('product_category_show', {'id' : category['category_id']}) }}">{{ category['name'] }}</a>
+                </div>
+                <div>{% set count = category['units'] %}
+                    {{ category['units'] }}
+                    {% transchoice count %}
+                        {0} units|{1} unit|]1,Inf] units
+                    {% endtranschoice %}
+                </div>
+                <div>   
+                    <span class="strong-text">{{ category['created_at']|date('d-m-Y') }}</span>
+                </div>
+            </div>
+    </div>
+{% else %}
+    <p>{{ "There're no categories in DB" |trans }}</p>
+{% endfor %} 
+    <br/>
+    <div class="all-link"><a class="liensRouge" href="{{ path('top_categories') }}">{{ "view all list"|trans }}</a></div>  
+</div>

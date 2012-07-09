@@ -1,0 +1,13 @@
+{% extends 'XshareProductBundle::product.html.twig' %}
+
+{% block title %}{{ "Personal products"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block maincontent %}
+    {% block productlist %}
+        {% include 'XshareProductBundle:Product:productList.html.twig' with {'userid':userid ,'page' : page} %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,24 @@
+<div class="login-block">
+    <h5>{% trans %}Connect{% endtrans %}</h5>
+    {% if error %}
+        <div class="error">{{ error.message|trans }}</div>
+    {% endif %}
+
+    <form action="{{ path("_security_check") }}" method="post" id="login">
+        <div>
+            <label for="username">{% trans %}Username or email{% endtrans %}</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
+
+        <div>
+            <label for="password">{% trans %}Password{% endtrans %}</label>
+            <input type="password" id="password" name="_password" />
+        </div>
+        <input type="hidden" name="_target_path" value="{{ referer }}" />
+        <div class="login-button"><input type="submit" value="OK" /></div>
+    </form>
+    <ul class="registration-links">
+        <li><a href="{{ path('user_registration') }}" class="liensGray">{% trans %}Register{% endtrans %}</a></li>
+        <li><a href="{{ path('user_forgot_password') }}" class="liensGray">{% trans %}Forgot password?{% endtrans %}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,52 @@
+{% extends 'XshareProductBundle::entityShow.html.twig' %}
+
+{% block title %}{{ "Detalii categorie"|trans }}{% endblock %}
+
+{% block entityimage %}
+    {% if category.image != '' %}
+        <img src="/uploads/categories/{{ category.image }}"
+        alt="{{ category.name }} logo" />
+    {% else %}
+        <img src="{{ asset('/images/category-icon.png') }}" alt="{{ category.name }} logo" />
+    {% endif %}
+{% endblock %}
+        
+{% block entitydetails %}
+    <h3>{{ category.name }}</h3>
+    <div>
+        <div class="label strong-text">{{ "Category owner"|trans }}:</div>
+            <a href="{{ path('user_details', { 'id' : category.getUser().getUserId() }) }}">{{ category.getUser().getUsername() }}</a>
+    </div>
+    <div>
+        <div class="label strong-text">{{ "Add date"|trans }}:</div>
+        {{ category.createdat|date('d')}} {{category.createdat|date('F')|trans|lower}} {{category.createdat|date('Y') }}
+    </div>
+    <div>
+        <div class="label strong-text">{{ "Total products"|trans }}:</div>
+        {{ category.getProducts()|length }}
+    </div>
+{% endblock %}
+
+{% block entityoptions %}
+    {#If the user is the author of the category#}
+    {% if (app.user) %}
+        {%if (category.getUser().getUserId() == app.user.getUserId())%}
+            <a class="clear-form" href="{{ path('product_category_edit', {'id' : category.getCategoryId()}) }}" >{{ "Edit"|trans }}</a>
+        {% endif %}    
+            <a class="clear-form" href="{{ path('new_product') }}">{{ "New product"|trans }}</a>    
+        {% if (category.getUser().getUserId() == app.user.getUserId()) %}
+            <a class="clear-form" href="{{ path('product_category_delete', {'id' : category.getCategoryId()}) }}" >{{ "Delete"|trans }}</a>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block entitystatistics %}
+    <div><div class="label">{{ "Borrowed this month"|trans }}:</div><span class="strong-text">{{ thisMonth }}</span></div>
+    <div><div class="label">{{ "Borrowed this week"|trans }}:</div><span class="strong-text">{{ thisWeek }}</span></div>
+    <div><div class="label">{{ "Views"|trans }}:</div><span class="strong-text">{{category.getStatistics}}</span></div>
+    <div class="clear"></div>
+{% endblock %}
+
+{% block entityaddinfo %}
+    {% include 'XshareProductBundle:Product:productBlockList.html.twig' with { 'products': products, 'prod_available': prod_available, 'cat_id' : category.getCategoryId() } %}
+{% endblock %}

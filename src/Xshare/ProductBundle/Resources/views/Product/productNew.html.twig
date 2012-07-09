@@ -1,0 +1,107 @@
+{% extends 'XshareProductBundle::product.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block maincontent %}
+    {% block productadd %}
+<h2>{{pagetitle|trans}}</h2>
+       <div class="entity-form">
+        <div class="product-add">
+               {% if app.session.hasFlash('rep') %}
+                <div class="product-result-notice">
+                    {{ app.session.flash('rep')|trans }}
+                </div>
+               {% endif %}
+              <form action="
+                    {% if product is defined %}
+                        {{ path('xshare_edit_product', {'pid' : product.getProductId()}) }}
+                    {% else %}
+                        {{ path('new_product') }}
+                    {% endif %}
+                    " method="post" {{ form_enctype(form) }} class="product">
+                    <table class="product-add-table" >
+                        <tr>
+                            <td valign="top" width="40%">
+
+                                {{ form_label(form.enable,"Enable"|trans~":") }}&nbsp;
+                                {{ form_widget(form.enable) }}
+                                <br />
+                                {% if form.status is defined %}
+                                    {{ form_label(form.status,"Make available"|trans~":") }}&nbsp;
+                                    {{ form_widget(form.status) }}
+                                    <br />
+                                {% endif %}
+                                <img src="
+                                    {% if product is defined %}
+                                        {{ asset(['/uploads/product/', product.getImage()]|join) }}
+                                    {% else %}
+                                        {{ asset('/uploads/product/no_photo.png') }}
+                                    {% endif %}
+                                     " width="150px" height="135px" alt="" /><br>
+                                {{ form_label(form.file,"Image"|trans~":") }}<br>
+                                {{ form_errors(form.file) }}
+                                {{ form_widget(form.file) }}
+                            </td>
+                            <td valign="top"  width="60%">
+                                <table>
+                                    <colgroup>
+                                        <col width="25%" />
+                                        <col width="75%"  />
+                                     </colgroup>
+                                    <tr>
+                                        <td>
+                                            {{ form_label(form.name,"Title"|trans~":*") }}<br>
+                                        </td>
+                                        <td>
+                                            {{ form_errors(form.name) }}
+                                            {{ form_widget(form.name) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ form_label(form.description,"Description"|trans~":*") }}</td>
+                                        <td>
+                                            {{ form_errors(form.description) }}
+                                            {{ form_widget(form.description, {'attr':{'class':'product-add-textarea'}}) }}
+                                        </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ form_label(form.category,"Category"|trans~":*") }}</td>
+                                        <td colspan="2" >
+                                            {{ form_errors(form.category) }}
+                                            {{ form_widget(form.category, {'attr':{'class':"category-select",'lang':app.session.getlocale()}}) }}
+                                            <img class="fright" id="loading-gif" src="{{asset("images/ajax-loader.gif")}}" width="20px" height="20px" alt="" />
+                                            <div class="clear"></div>
+                                            <div class="recived-data"></div>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                        <div class="entity-options">
+                            <input type="submit" value="{%trans%}Save{%endtrans%}" class="save">                            
+                            {% if product is defined %}
+                                <a class="clear-form" href="{{ path('xshare_edit_product', {'pid' : product.getProductId()}) }}" >{{ "Cancel"|trans }}</a>
+                            {% else %}
+                                <input onclick="$('.recived-data').html('');" type="reset" value="{%trans%}Cancel{%endtrans%}" class="save">
+                            {% endif %}
+                            <div class="clear"></div>
+                        </div>
+                    {{ form_rest(form) }}
+                </form>
+            <br />
+        </div>
+      </div>
+    {% endblock %}
+{% block productlist %}
+    {% include 'XshareProductBundle:Product:productList.html.twig' with {'userid':userid ,'page' : page} %}
+{% endblock %}
+{% endblock %}

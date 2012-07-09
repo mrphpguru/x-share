@@ -1,0 +1,35 @@
+<ul class="entity-items" id="date-DESC">
+    {% for category in pager.getResults %}
+        <li>
+            <div class="entity-name"><a href="{{ path('product_category_show', {'id': category.getCategoryId()}) }}">{{ category.name }}</a></div>
+            <div class="entity-added"> - {{"added at"|trans}} {{ category.createdat|date('d/m/Y') }}</div>
+            <div class="entity-unities"> - 
+                {% if category.getProducts()|length == 1 %}
+                    {{"one entity"|trans}}
+                {% else %}
+                    {{ category.getProducts()|length }} {{"entities"|trans}}
+                {% endif %}
+            </div>
+            <div class="entity-links">
+                <a href="{{ path('user_details', { 'id' : category.getUser().getUserId() }) }}">
+                    {% if category.getUser().getSex() == 'm' %}
+                        <img src="{{ asset('images/user.png') }}" />
+                    {% else %}
+                        <img src="{{ asset('images/user-woman.png') }}" />
+                    {% endif %}
+                </a>
+                <a href="{{ path('product_category_edit', {'id': category.getCategoryId()}) }}">
+                    <img src="{{ asset('images/file-icon.png') }}" />
+                </a>
+                <a href="{{ path('product_category_show', {'id': category.getCategoryId()}) }}">
+                    <img src="{{ asset('images/info-icon.png') }}" />
+                </a>
+            </div>
+            <div class="clear"></div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if pager.isPaginable %}
+    {{ paginateAjax(pager, block_length, { 'page' : 1 }) }}
+{% endif %}

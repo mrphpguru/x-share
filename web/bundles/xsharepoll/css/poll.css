@@ -1,0 +1,31 @@
+.poll-table{
+    width:100%;
+    
+}
+
+.poll-table td{
+    padding-bottom:10px;
+    vertical-align: top;
+    text-align:left;
+}
+
+.poll-table td input[type=text] , table.poll-table td textarea{
+    width:100%;
+}
+
+#poll_expired_at_day,#poll_expired_at_month{
+    width:45px;
+}
+
+#poll_expired_at_year{
+    width:60px;
+}
+
+.poll-info{
+    color:#555555;
+    font-size:11px;
+}
+
+.poll-form textarea{
+    height:150px;
+}

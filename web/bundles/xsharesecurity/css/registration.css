@@ -1,0 +1,28 @@
+.left-form-side { 
+    padding-left: 25px;
+}
+.right-form-side { 
+    padding: 15px 0px 0px 100px;
+}
+.button {
+    padding: 25px;
+}
+.error-div {
+    padding-left: 27px;
+}
+.registration td {
+    vertical-align: top;
+}
+.registration td.button {
+    text-align: center;
+}
+.forgot-form {
+    padding-left: 25px;
+}
+.forgot_email {
+    font-family: Arial;
+    font-size: 13px;
+    padding: 10px;
+    background: #FCFCFC;
+    color: #333333;
+}

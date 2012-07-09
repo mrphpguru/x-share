@@ -1,0 +1,31 @@
+<div class="requests-list">
+        <ul class="entity-loans">
+        {% for loan in pager.getResults %}
+              
+            <li class="loan-details {{ ((app.user) and (loan.getProduct().getUser().getUserId() == app.user.getUserId())) ? "partial" : "large" }}">
+                <div class="entity-loan-date">{{ loan.getBorrowDate()|date('j') ~ ' ' ~ loan.getBorrowDate()|date('F')|trans|lower ~ ' ' ~ loan.getBorrowDate()|date('Y') ~ ' - ' ~ loan.getReturnDate()|date('j') ~ ' ' ~ loan.getReturnDate|date('F')|trans|lower ~' '~ loan.getReturnDate|date('Y') }}</div>
+                <div class="entity-loan-user-link" style="float:right;">
+                    {{ "by"|trans ~ ' '}}
+                    <a href="{{ path('user_details', {'id': loan.getUser().getUserId() }) }}">{{ loan.getUser().getFirstname() ~ ' ' ~ loan.getUser().getLastname() }}</a>
+                </div>
+            </li>
+            
+            {% if ((app.user) and (loan.getProduct().getUser().getUserId() == app.user.getUserId()) ) %}
+                <li class="loan-actions">
+                    <div id="{{ loan.getId() }}" class="fright loan-actions">
+                        <a class="decline" title="{{ "decline"|trans }}"><img src="{{ asset('../images/refuse.png') }}" alt="{{ "decline"|trans }}"></a>
+                        <a class="accept" title="{{ "accept"|trans }}"><img src="{{ asset('../images/accept.png') }}" alt="{{ "accept"|trans }}"></a>
+                    </div>
+                </li> 
+            {% endif %}
+        {% else %}
+            {{ "The product has no requests"|trans }}
+        {% endfor %}
+        </ul>
+        <div class="clear"></div>
+        <div class="pager-loans">
+        {% if pager.isPaginable %}
+            {{ paginateAjax(pager, block_length, { 'page' : 1 }) }}
+        {% endif %}
+    </div>
+</div>

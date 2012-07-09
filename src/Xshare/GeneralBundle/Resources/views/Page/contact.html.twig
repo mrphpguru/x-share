@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Contacts"|trans }}{% endblock %}
+
+{% block maincontent %}
+    <div class="contact-form" >
+        <h2>{{'Contact us'|trans}}</h2>    
+        <br />
+        <h1>&nbsp;&nbsp;{% trans %}Use this form to send us a question.{% endtrans %}</h1>
+        <br />
+        {% if app.session.hasFlash('rep') %}
+                <div class="result-notice">
+                    {{ app.session.flash('rep')|trans }}
+                </div>
+        {% endif %}
+
+        <form action="{{ path('xshare_contact') }}" method="post" {{ form_enctype(form) }} class="contact">
+            <table class="contact-table">
+                <tr>
+                    <td>
+                        {{ form_label(form.firstname,"First Name:*"|trans) }}<br>
+                        {{ form_errors(form.firstname) }}
+                        {{ form_widget(form.firstname) }}
+                    </td>
+                    <td rowspan="5" valign="bottom" align="left" class="contact-security" width="300px" >
+                        <p>{{ form_label(form.securitycod,"Security cod:"|trans) }}</p>
+                        {{ form_errors(form.securitycod) }}
+                        <p class="contact-captcha">{{ form_widget(form.securitycod,{'label':'Enter security code*:'|trans}) }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form_label(form.lastname,"Last Name*:"|trans) }}<br>
+                        {{ form_errors(form.lastname) }}
+                        {{ form_widget(form.lastname) }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p>{{ form_label(form.email,"Email*:"|trans) }}</p>
+                        <p>{{ form_errors(form.email) }}</p>
+                        <p>{{ form_widget(form.email) }}</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p>{{ form_label(form.phone,"Phone:"|trans) }}</p>
+                        <p>{{ form_errors(form.phone) }}</p>
+                        <p>{{ form_widget(form.phone) }}</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p>{{ form_label(form.subject,"Subject*:"|trans) }}</p>
+                        <p>{{ form_errors(form.subject) }}</p>
+                        <p>{{ form_widget(form.subject) }}</p>  
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>{{ form_label(form.body,"Message*:"|trans) }}</p>
+                        <p>{{ form_errors(form.body) }}</p>
+                        <p>{{ form_widget(form.body) }}</p>
+                    </td>
+                </tr>
+            </table>
+            {{ form_rest(form) }}
+            <br />
+            <div class="contact-button-continer">
+                <input class="contact-button" type="submit" value="{% trans %}Send Message{% endtrans %}" />
+            </div>
+        </form>
+    </div>
+{% endblock %}

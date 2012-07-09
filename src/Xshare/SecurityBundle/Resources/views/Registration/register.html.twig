@@ -1,0 +1,163 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "User registration"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link rel="stylesheet" href="{{ asset('bundles/xsharesecurity/css/registration.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('css/start/jquery-ui-1.8.20.custom.css') }}" type="text/css" media="all" />
+    
+{% endblock %}  
+    
+{% block javascripts %}
+     {{ parent () }}
+    <script src="{{ asset('bundles/xsharesecurity/js/registration.js') }}"></script>  
+{% endblock %}    
+    
+{% block maincontent %}
+    <div>
+        <h3>{% trans %}User register{% endtrans %}</h3>
+        <form action="{{ path('user_registration') }}" method="post" {{ form_enctype(form) }}>
+            <table class="registration">
+                <tr>
+                    <td colspan="2" class="error">
+                        {% if form_errors(form) %}
+                            <div class="error-div">
+                                {{ form_errors(form) }}        
+                            </div>
+                        {% endif %}
+                         
+                        {% if form_errors(form.username) and (user.username != null) %}
+                            <div class="error-div">
+                                {{ form_errors(form.username)}}  
+                            </div>
+                        {% endif %}
+                        {% if form_errors(form.email) and (user.email != null) %}
+                            <div class="error-div">
+                                {{ form_errors(form.email)}}  
+                            </div>
+                        {% endif %}
+                        {% if form_errors(form.phone) %}
+                            <div class="error-div">
+                                {{ form_errors(form.phone)}}  
+                            </div>
+                        {% endif %}    
+                        {% if form_errors(form.birth_date) %}
+                            <div class="error-div">
+                                {{ form_errors(form.birth_date)}}  
+                            </div>
+                        {% endif %}  
+                        {% if app.session.hasFlash('registration-notice') %}
+                            <div class="error-div">
+                                {{ app.session.flash('registration-notice') }}
+                            </div>
+                        {% endif %}    
+                        <br/>     
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="left-form-side">    
+                            <div>
+                                <div>  
+                                    {{ form_label(form.username, 'Username'|trans ~ '*' ) }}
+                                </div>
+                                <div>    
+                                    {{ form_widget(form.username) }}
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    {{ form_label(form.firstname, 'First name'|trans ~ '*' ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.firstname) }}
+                                </div>    
+                            </div>    
+                            <div>
+                                <div>
+                                    {{ form_label(form.lastname, 'Last name'|trans ~ '*' ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.lastname) }}
+                                </div>    
+                            </div>
+                            <div>
+                                <div>
+                                    {{ form_label(form.email, 'E-mail'|trans ~ '*' ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.email) }}
+                                </div>    
+                            </div>
+                            <div>
+                                <div>
+                                    {{ form_label(form.password.first, 'Password'|trans ~ '*' ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.password.first) }}
+                                </div>    
+                            </div>     
+                            <div>
+                                <div>
+                                    {{ form_label(form.password.second, 'Confirm password'|trans ~ '*' ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.password.second) }}
+                                </div>    
+                            </div>
+                            <div>
+                                <div>
+                                    {{ form_label(form.phone, 'Phone'|trans ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.phone) }}
+                                </div>    
+                            </div>    
+                            <div>
+                                <div>
+                                    {{ form_label(form.birth_date, 'Birthdate'|trans ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.birth_date, {'id': 'datepicker', 'attr':{'readonly':'readonly'}}) }}
+                                </div>    
+                            </div>
+                            <div>
+                                <div>
+                                    {{ form_label(form.sex, 'Sex'|trans ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.sex) }}
+                                </div>    
+                            </div>    
+                        </div>
+                    </td>
+                    <td>
+                         <div class="right-form-side">    
+                            <div>
+                                <div>
+                                    <img src="{{ asset(['bundles/xshareuser/images/', user.photo ]|join) }}" width="75" height="100" />
+                                </div>
+                                <div>
+                                    {{ form_label(form.file, 'Upload your photo'|trans ) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.file) }}
+                                </div>    
+                            </div>     
+                        </div> 
+                       
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="button">
+                         <div >
+                            <input id="register-button" type=submit value="{% trans %}Register{% endtrans %}" />
+                        </div>
+                    </td>
+                </tr>
+            </table>  
+            {{ form_rest(form) }}
+        </form>
+    </div>        
+{% endblock %}

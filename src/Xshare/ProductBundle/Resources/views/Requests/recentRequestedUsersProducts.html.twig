@@ -1,0 +1,8 @@
+{% if requests is not empty %}
+<h5>{{"Recent requests" | trans}}</h5>
+<ul>
+    {% for request in requests %}
+    <li><span class="emphisize-text">{{request['requests']}}</span><a class="liensGray" href="{{ path('xshare_show_product', { 'pid': request['product_id'] }) }}">{{request['name']}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}

@@ -1,0 +1,79 @@
+{% extends 'XshareProductBundle::product.html.twig' %}
+
+{% block title %}{{ "Product details"|trans }}{% endblock %}
+
+{% block maincontent %}
+{%if product|length > 0%}
+    {% block showproduct%}
+        <h2>{%trans%}Product Details{%endtrans%}</h2>
+        {% if product is not null%}
+        <div class="entity-show">
+            <div class="entity-image">
+                <img alt="Movies logo" src="/uploads/product/{{product.getImage()}}">
+            </div>
+            <div class="entity-details">
+                <h3>{{product.getName()}}</h3>
+                <div>
+                    <div class="label long-label"><b>{%trans%}Product owner{%endtrans%}:</b></div>
+                    <a href="{{path("user_details",{'id':product.user.getUserId()})}}">{{product.user.getFirstname()}}&nbsp;{{product.user.getLastname()}}</a>
+                </div>
+                <div>
+                    <div class="label long-label"><b>{%trans%}Add date{%endtrans%}:</b></div>
+                    {{ product.createdat|date('d M Y')}}
+                </div>
+                <div>
+                    <div class="label long-label"><b>{{"Borrowed by"|trans}}:</b></div>
+                    {% set loans    = product.getRequests()%}
+                    {% set lonedmsg = "not loaned"|trans %}
+                    {%for loan in loans %}
+                        {%if loan.getBookingId() is not null %}
+                            {% set lonedmsg %}
+                                <a href="{{path("user_details",{'id':loan.getUser().getUserId()})}}" >{{loan.getUser().getFirstName()~" "~loan.getUser().getLastName()}}</a>
+                            {%endset%}
+                        {%endif%}
+                    {%endfor%}
+                    {{lonedmsg}}
+                </div>
+                <div>
+                    <p class="long-label"><b>{{"Description"|trans}}:</b> </p>
+                    {{product.getDescription()}}
+                </div>
+            </div>
+            <div class="clear"></div>
+                {% block entityoptions %}
+                    <div class="entity-options">
+                        {#If the user is the author of the product#}
+                        {% if app.user is not null%}
+                            {%set sesuserid = app.user.getUserId() %}
+                            {% if product.user.getUserId() == sesuserid %}
+                                <a class="clear-form" href="{{ path('xshare_edit_product', {'pid' : product.getProductId()}) }}" >{{ "Edit"|trans }}</a>
+                                <a class="clear-form" href="{{path("new_product")}}" >{{ "New product"|trans }}</a>
+                            {% endif %}
+                            {% if product.user.getUserId() == sesuserid %}
+                                <a class="clear-form" onclick="return confirm('{{ 'Are you sure do you want to delete this product?'|trans }}')" href="{{path('xshare_delete_product',{'pid':product.getProductId()})}}" >{{ "Delete"|trans }}</a>
+                            {% endif %}
+                            {% if product.user.getUserId() != sesuserid %}
+                                <a id="loan_popup" data-fancybox-type="ajax" class="clear-form" href="{{path("xshare_ajax_loan",{'pid':product.getProductId()})}}" >{{ "Loan now"|trans }}</a>
+                            {%endif%}
+                        {%endif%}
+
+                    </div>
+            {% endblock %}
+        {% block entitystatistics %}
+           <div class="entity-statistics separator">
+            <div><div class="label">{{ "Borrowed this month"|trans }}:</div><span class="strong-text">{{ thisMonth }}</span></div>
+            <div><div class="label">{{ "Borrowed this week"|trans }}:</div><span class="strong-text">{{ thisWeek }}</span></div>
+            <div><div class="label">{{ "Views"|trans }}:</div><span class="strong-text">{{product.getStatistics}}</span></div>
+           </div>
+        {% endblock %}
+            <div class="clear"></div>
+        </div>
+        {% else %}
+            {{"There are no products"|trans}}!
+        {%endif%}
+    {% endblock%}
+    {% block entityaddinfo %}
+        {% render 'XshareProductBundle:Product:requests' with { 'product_id' : product.getProductId(), 'page' : 1 } %}
+    {% endblock %}
+  {% endif%}
+{% endblock%}

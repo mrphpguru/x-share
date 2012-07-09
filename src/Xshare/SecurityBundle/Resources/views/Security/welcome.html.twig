@@ -1,0 +1,22 @@
+<div class="mylinks" >
+    <h5>{{ "Hello"|trans }} {{ app.user.firstname }}</h5>
+    <ul>
+        <li><a href="{{ path('user_details', {'id': app.user.userid}) }}" class="liensGray">{% trans %}My profile{% endtrans %}</a></li>
+        <li><a href="{{ path('personal_categories') }}" class="liensGray">{% trans %}Personal categories{% endtrans %}</a></li>
+        <li><a href="{{ path('personal_products') }}" class="liensGray">{% trans %}Personal products{% endtrans %}</a></li>
+        <li><a href="{{ path('xshare_users_requests') }}" class="liensGray">{% trans %}My requests{% endtrans %}</a></li>
+        <li><a href="{{ path('users_products_requests') }}" class="liensGray">{% trans %}Requests{% endtrans %}</a></li>
+        
+        <br>
+        <li><a href="{{ path('product_category_create') }}" class="liensGray">{% trans %}Add a new category{% endtrans %}</a></li>
+        <li><a href="{{ path('new_product') }}" class="liensGray">{% trans %}Add a new product{% endtrans %}</a></li>
+
+        
+        {#{%if app.user.getTypeAccess() == 'admin' %} 
+        <li><a href="{{ path('xshare_new_poll') }}" class="liensGray">{% trans %}Add a new poll{% endtrans %}</a></li>
+        <li><a href="{{path("xshare_poll_list_first")}}" class="liensGray" >{{"Polls List"|trans}}</a></li>
+        {% endif %}#}
+
+        <li><a href="{{ path('_logout') }}" class="liensGray" id="logout-lien" >{{"Logout"|trans }}</a></li>
+    </ul>
+ </div>

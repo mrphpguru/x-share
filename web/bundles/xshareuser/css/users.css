@@ -1,0 +1,65 @@
+/* list of users */
+.list-of-users {
+    clear: both;
+}
+
+.list-of-users .entity {
+    float: left;
+    width: 49%;
+    height: 110px;
+    background-color: #E0EAF8;
+    margin-right: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.list-of-users .entity-image {
+    width: 90px;
+    float: left;
+    overflow: hidden;
+}
+
+.list-of-users .entity-image img {
+    margin: 5px;
+    max-height: 100px;
+    max-width: 75px;
+    min-height: 64px;
+    min-width: 64px;
+    border: 1px solid #387CE2;
+    background: white;
+}
+
+.list-of-users .entity-details {
+    padding-top: 10px;
+    margin-left: 95px;
+}
+
+.list-of-users div {
+    padding-bottom: 5px;
+}
+
+.list-of-users .available,
+.list-of-users .loaned {
+    float: none;
+    position: static;
+}
+
+.filters {
+    float: right;
+    width: 250px;
+    padding-bottom: 15px;
+}
+
+.filters ul {
+    overflow: hidden;
+    float: right;
+}
+
+.filters li {
+    float: left;
+    padding: 0 8px;
+}
+.filters p {
+    float: left;
+}
+/* end list of users */

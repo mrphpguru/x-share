@@ -1,0 +1,215 @@
+<?php
+
+namespace Xshare\ProductBundle\Entity;
+
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Xshare\ProductBundle\Entity\Loans
+ *
+ * @ORM\Table(name="loans")
+ * @ORM\Entity(repositoryClass="Xshare\ProductBundle\Repository\LoansRepository")
+ */
+class Loans
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $loans_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="loans")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
+     */
+    private $product;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Xshare\UserBundle\Entity\User", inversedBy="loans")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     */
+    private $user;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $borrow_date;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $return_date;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $real_return_date;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $accepted;
+    
+    public function __construct()
+    {
+        $this->active = 1;
+        $this->accepted = 0;
+    }
+
+    /**
+     * Get loans_id
+     *
+     * @return integer 
+     */
+    public function getLoansId()
+    {
+        return $this->loans_id;
+    }
+
+    /**
+     * Set borrow_date
+     *
+     * @param date $borrowDate
+     */
+    public function setBorrowDate($borrowDate)
+    {
+        $this->borrow_date = $borrowDate;
+    }
+
+    /**
+     * Get borrow_date
+     *
+     * @return date 
+     */
+    public function getBorrowDate()
+    {
+        return $this->borrow_date;
+    }
+
+    /**
+     * Set return_date
+     *
+     * @param date $returnDate
+     */
+    public function setReturnDate($returnDate)
+    {
+        $this->return_date = $returnDate;
+    }
+
+    /**
+     * Get return_date
+     *
+     * @return date 
+     */
+    public function getReturnDate()
+    {
+        return $this->return_date;
+    }
+
+    /**
+     * Set real_return_date
+     *
+     * @param date $realReturnDate
+     */
+    public function setRealReturnDate($realReturnDate)
+    {
+        $this->real_return_date = $realReturnDate;
+    }
+
+    /**
+     * Get real_return_date
+     *
+     * @return date 
+     */
+    public function getRealReturnDate()
+    {
+        return $this->real_return_date;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param boolean $accepted
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
+    }
+
+    /**
+     * Get accepted
+     *
+     * @return boolean 
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * Set product
+     *
+     * @param Xshare\ProductBundle\Entity\Product $product
+     */
+    public function setProduct(\Xshare\ProductBundle\Entity\Product $product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * Get product
+     *
+     * @return Xshare\ProductBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Xshare\UserBundle\Entity\User $user
+     */
+    public function setUser(\Xshare\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Xshare\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

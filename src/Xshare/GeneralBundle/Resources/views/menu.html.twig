@@ -1,0 +1,29 @@
+<nav>
+    <ul class="navigation">
+        <li class="menu-item {% if menu is not defined %}active{% endif %}"><a href="{{path("xshare_general_default_index")}}" >{% trans %}Home{% endtrans %}</a></li>
+        <li class="menu-item {% if menu.users is defined %}active{% endif %} "><a href="{{ path('all_users_list') }}" >{% trans %}Users{% endtrans %}</a></li>
+        <li class="menu-item {% if menu.categories is defined %}active{% endif %} "><a href="{{ path('category_list') }}" >{% trans %}Categories{% endtrans %}</a></li>
+        <li class="menu-item {% if menu.products is defined %}active{% endif %} "><a href="{{ path('all_products_list') }}" >{% trans %}Products{% endtrans %}</a></li>        
+        <li class="menu-item last {% if menu.contact is defined %}active{% endif %}"><a href="{{ path('xshare_contact') }}" >{% trans %}Contacts{% endtrans %}</a></li>
+    </ul>
+    <div class="clear"></div>
+</nav>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $centralBlock = $('#main').height();
+        $sideBarLeft = $('.sidebar-left').height();
+        $sideBarRight = $('.sidebar-right').height();
+        if($sideBarLeft>$sideBarRight){
+            $height = $sideBarLeft;
+        }else{
+             $height = $sideBarRight;
+        }
+        if($centralBlock>$height){
+            $('.sidebar').height($('#main').height());
+        }else{
+            $('#main').height($height);
+        }
+    });
+</script>    
+
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('css/ui-lightness/jquery-ui-1.8.21.custom.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('js/fancyBox/jquery.fancybox.css') }}" />
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui-1.8.21.custom.min.js') }}"></script>
+            <script src="{{ asset('js/fancyBox/jquery.fancybox.js') }}" type="text/javascript"></script>
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <section id="wrapper">
+            <header id="header">
+                <div class="menu">
+                    {% block navigation %}
+                        {% include 'XshareGeneralBundle::menu.html.twig' %}
+                    {% endblock %}
+                        {% include 'XshareGeneralBundle:Default:language.html.twig' %}
+                </div>
+                <div class="search">
+                    {% block search %}
+                        {% include 'XshareProductBundle::search.html.twig' %}
+                    {% endblock %}
+                </div>
+                <div class="breadcrumbs">
+                    {% block breadcrumbs %}
+                        {{ wo_render_breadcrumbs() }}
+                    {% endblock %}
+                    <div class="clear"></div>
+                </div>
+            </header>
+            <section class="main-container">
+                <aside class="sidebar sidebar-left">
+                    <div class="inner">
+                    {% block leftsidebar %}
+                        <div class="recent-products">
+                            {% render 'XshareProductBundle:Product:recentProductsBlock' %}
+                        </div>
+                        <div class="sidebar-block top-users">
+                            {% block topusers %}
+                                {% render 'XshareUserBundle:User:topUsersList' %}
+                            {% endblock %}
+                        </div>
+                        <div class="sidebar-block top-search">
+                            {% block topsearch %}
+                                {% render 'XshareProductBundle:Search:topSearchList' %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                    </div>
+                </aside>
+
+                <section id="main">
+                    <div class="inner">
+                    {% if app.session.hasFlash('loanMesage') or app.session.hasFlash('flashSuccess')%}
+                        <div class="flash-success">
+                            {{app.session.flash('loanMesage')|trans}}
+                            {{app.session.flash('flashSuccess')|trans}}    
+                        </div>
+                    {% endif %}
+                    {% if app.session.hasFlash('logerr') %}
+                        <div class="flash-error">
+                            {{app.session.flash('logerr')|trans}}
+                        </div>
+                    {% endif %}
+                    <!-- main container -->
+                    {% block maincontent %}
+                    {% endblock %}
+                    <!-- and main container -->
+                    </div>
+                </section>
+
+                <aside class="sidebar sidebar-right">
+                    <div class="inner">
+                        {% block rightsidebar %}
+                            {% if app.user %}
+                                {# user is logged in #}
+                                {% render "XshareSecurityBundle:Security:welcome" %}
+                            {% else %}
+                                {# user is not logged in #}
+                                {% render "XshareSecurityBundle:Security:login" %}
+                            {% endif %}
+                        {% if ( app.user != null ) %}
+                        <div class="sidebar-block user-product-recent-requests">
+                            {% block recentrequests %}
+                                {% render 'XshareProductBundle:Requests:recentRequestedUsersProducts' %}
+                            {% endblock %}
+                        </div>
+                        <div class="sidebar-block user-recent-requests">
+                            {% block myrecentrequests %}
+                                {% render 'XshareProductBundle:Requests:recentUserRequests' %}
+                            {% endblock %}
+                        </div>
+                        {% endif %}
+                        {% endblock %}
+                        <div id="poll-continer-block" class="poll-continer-block sidebar-block">
+                        {% block poll %}
+                            {% render "XsharePollBundle:Poll:show" %}
+                        {% endblock %}
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <footer id="footer">
+                {% block footer %}
+                    {% include 'XshareGeneralBundle::menu.html.twig' %}
+                {% endblock %}
+            </footer>
+        </section>
+    </body>
+
+    <!-- requests calendar -->
+    <script type="text/javascript">
+        $('#loan_popup').fancybox({
+            openEffect  : 'fadeIn',
+            closeEffect : 'fadeOut',
+            type:'ajax',
+            maxWidth	: 700,
+            maxHeight	: 600,
+            fitToView	: false,
+            width		: '600',
+            height		: '400',
+            autoSize	: false,
+            closeClick	: false,
+            helpers: {
+                title: false
+            }
+        });
+    </script>
+
+</html>

@@ -1,0 +1,33 @@
+<div class="entity-block-list list-of-users">
+    {% for user in paginator.getResults %}
+
+        <div class="entity">
+            <div class="entity-image">
+                <a href="{{ path('user_details', { 'id': user.user_id }) }}">
+                    <img src="{{ asset(['/uploads/users/', user.photo]|join) }}" alt="{{ user.username }}" />
+                </a>
+            </div>
+            <div class="entity-details">
+                <div><a href="{{ path('user_details', { 'id': user.user_id }) }}">{{ user.firstname }} {{ user.lastname }} ({{ user.username }})</a></div>
+
+                {% set img_src = 'user.png' %}
+
+                {% if user.sex == 'w' %}
+                    {% set img_src = 'user_woman.png' %}
+                {% endif %}
+
+                <div>{{ "%d"|format(user.age) }} {{ "years"|trans }} <img src="{{ asset(['/images/', img_src ]|join) }}" alt="" /></div>
+                <div>
+                    {{"products"|trans }}: {{ user.products }}
+                    (<span class="available">{{ "%d"|format(user.available) }}</span>
+                        {{ 'and'|trans }}
+                    <span class="loaned">{{ "%d"|format(user.products - user.available) }}</span>)
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <p>{{ "There're no users in DB" |trans }}</p>
+    {% endfor %}
+</div>
+<div class="clear"></div>

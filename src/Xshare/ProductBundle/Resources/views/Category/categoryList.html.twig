@@ -1,0 +1,13 @@
+{% if pager.hasResults() %}
+    <h2 class="header">{{"Personal Categories"|trans}}</h2>
+    <div class="category-list">
+        <ul class="filter filter-category fright">
+            <li id="filter-date" class="desc">{{ "Date"|trans }}</li><span class="delimiter">&nbsp;|&nbsp;</span>
+            <li id="filter-title">{{ "Title"|trans }}</li><span class="delimiter">&nbsp;|&nbsp;</span>
+            <li id="filter-unities">{{ "Unities"|trans }}</li>
+        </ul>
+        <div class="clear"></div>
+        {% include 'XshareProductBundle:Category:categoryListItems.html.twig' with { 'pager' : pager, 'block_length' : block_length } %}
+
+    </div>
+{% endif %}

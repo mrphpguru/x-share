@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:48:"Symfony\\Component\\Validator\\Constraints\\Callback":2:{s:7:"methods";a:1:{i:0;a:2:{i:0;s:44:"Xshare\\SecurityBundle\\UsernameValidatorClass";i:1;s:15:"isUsernameValid";}}s:6:"groups";a:1:{i:0;s:7:"Default";}}}');

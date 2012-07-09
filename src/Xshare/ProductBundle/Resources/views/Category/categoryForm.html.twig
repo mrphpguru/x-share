@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+    {% block categoryform %}
+        <h2>{{pagetitle|trans}}</h2>
+        <div class="entity-form category-form">
+            {% if app.session.hasFlash('category-add-notice') %}
+                <div class="product-result-notice">
+                    {{ app.session.flash('category-add-notice')|trans }}
+                </div>
+            {% endif %}
+            <form action="
+                {% if category is not defined %}
+                    {{ path('product_category_create') }}
+                {% else %}
+                    {{ path('product_category_update', { 'id' : category.getCategoryId() }) }}
+                {% endif %}
+                " 
+                method="post" {{ form_enctype(form) }} >
+                {{ form_errors(form) }}
+
+                <div class="entity-image">
+                    <div class="status-input">
+                        {{ form_label(form.status,"Available"|trans) }}
+                        {{ form_widget(form.status) }}
+                    </div>
+                    {% if category is defined %}
+                        <img src="/uploads/categories/{{ category.image }}"
+                        alt="{{ category.name }} logo" />
+                    {% else %}
+                        <img src="{{ asset('/images/category-icon.png') }}" alt="category logo" />
+                    {% endif %}                    
+                </div>
+                <div class="entity-details">
+                    <div class="entity-name-input">
+                        <span class="error-div">{{ form_errors(form.name) }}</span>
+                        {{ form_label(form.name,"Name"|trans) }}
+                        {{ form_widget(form.name) }}
+                    </div>                    
+                    <div class="clear"></div>
+                    <span class="error-div">{{ form_errors(form.description) }}</span>
+                    {{ form_label(form.description,"Details"|trans) }}
+                    {{ form_widget(form.description) }}
+                </div>
+                    <div class="clear"></div>     
+                <span class="error-div">{{ form_errors(form.file) }}</span>
+                <div class="entity-options">                    
+                    {{ form_label(form.file,"Image"|trans) }}
+                    {{ form_widget(form.file) }}
+                </div>
+                <div class="entity-options">
+                    <input class="save" type="submit" value="{{ "Save"|trans }}" />
+                    {% if category is defined %}
+                        <a class="clear-form" href="{{ path('product_category_edit', { 'id': category.getCategoryId() }) }}" >{{ "Cancel"|trans }}</a>
+                    {% else %}
+                        <a class="clear-form" href="{{ path('product_category_create') }}" >{{ "Cancel"|trans }}</a>
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                {{ form_rest(form) }}
+            </form>
+            <div class="add-entity" ><a href="{{path("new_product")}}">{{ "New product"|trans }}</a></div>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+    
+    {% block categorylist %}
+        {% render 'XshareProductBundle:Category:userCategories' %}
+    {% endblock %}
+
+    <script src="{{ asset('js/jquery.url.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('bundles/xshareproduct/js/categories.js') }}" type="text/javascript"></script>
+{% endblock %}

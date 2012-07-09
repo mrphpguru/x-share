@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ asset('bundles/xsharesecurity/css/registration.css') }}" type="text/css"/>
+    </head>
+    <body>
+        <div class="forgot_email" >
+        <p>{% trans %}Hello{% endtrans %},&nbsp;{{ loan.getUser().getFirstname() }}<br/> {% trans %}Your loan request for{% endtrans %}&nbsp;<b>{{ loan.getProduct.getName() }}</b>&nbsp;
+            {% if cancel == true %}
+                {% trans %}has been canceled because another request for the same period has been accepted{% endtrans %}.
+            {% else %}
+                {% trans %}has been declined{% endtrans %}.
+            {% endif %}
+        </p>
+        </div>
+    </body>
+</html>

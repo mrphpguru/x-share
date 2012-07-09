@@ -1,0 +1,21 @@
+{% if poll|length >0 %}
+{% block javascripts %}
+<script type="text/javascript">
+var lang     = '{{app.session.getlocale()}}';
+</script>
+<script type="text/javascript" src="{{ asset('bundles/xsharepoll/js/poll.js') }}"></script>
+{% endblock %} 
+<div class="poll-show-block">
+    <h5>{{"Poll"|trans}}</h5>
+    {{poll.getQuestion()}}
+    <form id="pollresult_form" action="{{ path('xshare_new_pollresult',{'pollid':poll.getPollId()}) }}" method="post" class="poll-resul" >
+    {% for opt in poll.getArrayAnswers()%}
+        <p><input id="{{loop.index0}}" type="radio" name="pollresult" value="{{opt}}" /> <label for="{{loop.index0}}">{{opt}}</label></p>
+    {% endfor %}
+        <br>
+        <div align="center">
+            <input type="submit" value="{{"Vote"|trans}}" class="save"></input>
+        </div>
+    </form>          
+</div>
+{%endif%}

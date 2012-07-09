@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Top products"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+    <section class="top-products">
+        <h2 class="header" id="top-all-products">{{ "Top Products"|trans }}</h2>
+        {#%<ul class="filter fright">
+            {% if order == 'asc' %}
+                {% set ord = 'DESC' %}
+            {% else %}
+                {% set ord = 'ASC' %}
+            {% endif %}
+            {% if filter == 'date' %}            
+                <li class="{{ order }}"><a href="{{ path('top_products_filter', {'filter' : 'date', 'order' : ord}) }}">{{ "Date"|trans }}</a></li><span class="delimiter">&nbsp;|&nbsp;</span>
+                <li><a href="{{ path('top_products_filter', {'filter' : 'title', 'order' : 'ASC'}) }}">{{ "Title"|trans }}</a></li>
+            {% else %}
+                <li><a href="{{ path('top_products_filter', {'filter' : 'date', 'order' : 'ASC'}) }}">{{ "Date"|trans }}</a></li><span class="delimiter">&nbsp;|&nbsp;</span>
+                <li class="{{ order }}"><a href="{{ path('top_products_filter', {'filter' : 'title', 'order' : ord}) }}">{{ "Title"|trans }}</a></li>
+            {% endif %}
+        </ul> 
+        <div class="clear"></div>#}
+        {% include 'XshareProductBundle:Product:productBlockListArray.html.twig' with { 'pager' : pager} %}
+
+        {% if pager.isPaginable %}
+            {{ paginate(pager, 'top_products_filter_page', block_length, {'page' : page}) }}
+        {% endif %}
+    </section>
+{% endblock %}

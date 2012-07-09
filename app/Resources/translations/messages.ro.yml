@@ -1,0 +1,319 @@
+'Connect': Conectează-te
+'Username or email': Nume sau email utilizator
+'Password': Parola
+'Register' : Înregistrează-te
+'Forgot password?' : Ai uitat parola?
+'Contact us': Contactează-ne
+'Hello': 'Salut'
+'My profile': 'Profilul meu'
+'Add a new category': 'Adaugă o categorie noua'
+'Add a new product': 'Adaugă un produs nou'
+'Logout' : 'Deconectează-te'
+#contact translation
+'Use this form to send us a question.': Folositi acest formular pentru a ne trimite o intrebare.
+'First Name:*': Numele:*
+'Contacts': Contact
+'Last Name*:' : Prenumele:*
+'Phone:' : "Telefon:"
+'Subject*:' : Subiect:*
+'Message*:' : Mesaj:*
+'Security cod:' : "Cod de securitate:"
+'Enter security code*:': Introduceti codul de securitate:*
+'Data was sent successfully!' : Datele au fost trimise cu succes!
+'Send Message': Trimite Mesaj
+#end contact translation
+#start mail translation
+'Message from www.x-share.com' : 'Mesaj de pe www.x-share.com'
+'Hello' : Salut
+'you received a message from the contact page of the site at www.x-share.com from' : ați primit un mesaj de pe pagina de contact al site-ul www.x-share.com de la
+'Subject' : 'Subiectul'
+'Content' : Continut
+'Contact' : Date de contact
+'Phone' : Telefon
+'Send date' : Data expedierii
+'Your loan request has been accepted' : Cererea de împrumut a fost acceptată
+'These are the request details' : Iata detaliile de împrumut
+'Product name' : Numele produsului
+'Loan period' : Perioda de împrumut
+'Loan request decline' : Cerere de împrumut refuzată
+'Loan request accept' : Cerere de împrumut acceptată
+'Loan request cancel' : Cerere de împrumut anulată
+'Your loan request for' : Cererea de împrumut pentru
+'has been declined' : a fost refuzată
+'has been canceled because another request for the same period has been accepted' : a fost anulată drept urmare a acceptării unei alte cereri pentru aceeași perioadă
+#end mail translation
+
+#Category translations
+'Name': Denumire
+'Image': Imagine
+'Details': Detalii
+'Available': Disponibil
+'available': disponibil
+'unavailable': indisponibil
+'New product': Produs nou
+'Save': Salvează
+'Cancel': Renunță
+'Personal Categories': Categoriile Personale
+'added at': adăugat la
+'Added at': Adăugat la
+'unities': unități
+'Category owner': Proprietar categorie
+'Add date': Data adăugării
+'Total products': Total produse
+'January': Ianuarie
+'February': Februarie
+'March': Martie
+'April': Aprilie
+'May': Mai
+'June': Iunie
+'July': Iulie
+'August': August
+'September': Septembrie
+'October': Octombrie
+'November': Noiembrie
+'December': Decembrie
+'Edit': Editează
+'Delete': Șterge
+'Another owner': Alt proprietar
+'Statistics': Statistica
+'Borrowed this month': Împrumutat luna aceasta
+'Borrowed this week': Împrumutat săptămâna aceasta
+'Views': Vizualizări
+'Category': Categorie
+'There are no products for this category': Nu există produse pentru această categorie
+'Added by': Adăugat de
+'Status': Statut
+'Status': Statut
+'loaned': împrumutat
+'by' : de
+'all': toate
+'all products' : toate produsele
+'All products in category': Produse în categorie
+'Products in category': Produse în categorie
+'The category has been successfully added' : Categoria a fost adăugată cu succes
+'The category has been successfully updated' : Categoria a fost salvată cu succes
+'The category has been successfully deleted' : Categoria a fost eliminată cu succes
+'entities': unități
+'entity': unitate
+'one entity': o unitate
+'Category not found' : Categoria nu a fost găsită
+#End of category translation
+'unities': unități
+
+#translations for user's registration form
+'User register' : Înregistrare utilizator
+'First name' : Prenume
+'Last name' : Nume
+'E-mail' : E-mail
+'Password' : Parolă
+'Confirm password' : Confirmare parolă
+'Phone' : Telefon
+'Birthdate' : Ziua de naștere
+'Sex' : Sex
+'Upload your photo' : Încarcă fotografia de pofil
+'The registration was successful' : Înregistrarea a avut loc cu succes
+'Male' : Masculin
+#end translations for user's registration form
+
+#translations for Forgot pssword form
+'The registration of new password was successful' : Înregistrarea parolei noi a avut loc cu succes
+'I forgot my password' : Am uitat parola
+'Submit' : Trimite
+'New password' : Parolă nouă
+'Confirm new password' : Confirmare parolă nouă
+'The registration of new password failed' : Înregistrarea parolei a eșuat
+'Password modification' : Modificarea parolei
+'Your password was modified' : Parola a fost modificată
+'This is your connect data' : Acestea sunt datele de conectare
+'Send message failed' : Trimiterea mesajului a eșuat
+#end Forgot password translations
+#login error messages
+'Bad credentials' : Datele sunt greșite
+'The presented password is invalid.' : 'Parola este greșită'
+#end login error messages
+#category_list translations
+'Categories' : Categorii
+'Filter' : Filtrare
+'Date' : Data
+'Title' : Titlu
+'Units' : Unități
+'Ascending sort' : Sortare ascendentă
+'Descending sort' : Sortare descendentă
+'units' : unități
+#end category_list translations
+
+#user_details translations
+'User details' : Detalii utilizator
+'New Product' : Produs Nou
+'The modifications were saved' : Modificările au fost salvate
+'One or more required parameters were not introduced' : Unul sau mai mulți parametri obligatori nu au fost introduși corect
+'User products' : Produsele utilizatorului
+'added by' : adăugat de
+'at' : la
+'available' : disponibil
+'unavailable' : indisponibil
+'My products' : Produsele mele
+'Photo' : Fotografie
+'Statistic' : Statistică
+'Borrowed products' : Produse luate cu împrumut
+'Lent products' : Produse date cu împrumut
+'Views' : Vizualizări
+'Female' : Feminin
+'Male' : Masculin
+'Top users' : Top utilizatori
+#end user_details translations
+
+#common button and input fields labels
+'Search' : Cautare
+'Select' : Selectează
+
+#new product translation#
+'Description': Descriere
+'Reset' : Resetează
+'Make available' : Marchează ca disponibil
+'Category Details': Detalii Categorie
+'You have successfully added a new product!': Ați adaugat un produs nou cu succes! 
+'You have successfully updated the product!': Produsul a fost salvat cu succes! 
+#end new product translation#
+'Select' : Selectează
+
+# product translations
+'products' : produse
+'years': ani
+'and' : și
+'decline' : refuză
+'accept' : acceptă
+'Product Details' : Detalii Produs
+'Product owner' : Stapinul produsului
+'Loan now' : Împrumută-l acum
+'Borrowed by' : Împrumutat de
+'User name' : Nume
+'Date' : Data
+'Personal categories' : Categoriile personale
+'Personal products' : Produsele personale
+'Top Products' : Top produse
+'Available in': Disponibil în
+'day': zi
+'days': zile
+'Product not found': Produsul nu a fost găsit
+# product translations
+
+# all products list translations
+'Products list' : Lista de produse
+'User' : Utilizator
+'Status' : Statut
+# end all products list translations
+
+
+#ajax loan translaton
+'Validate' : Validează
+'Product Name' : Nume Produs
+'Product Owner': Stapînul Produsului
+'Added Date' : Data adăugarii
+'Select a period' : Selectați perioada
+'Selected period' : Perioada selectata
+'Success' : Succes
+'Product are unavailable in selected period': Produsul este indisponibil in perioada selectata
+#end ajax loan translation
+
+# top 3 categories and top 6 products
+'Top categories' : Top categorii
+'Top products' : Top produse
+'all' : toate
+'{0} units|{1} unit|]1,Inf] units' : '{0} unități|{1} unitate|]1,Inf] unități'
+'There are no products' : Nu există produse
+'Available in' : 'Disponibil în'
+'{1} day|]2,Inf] days' : '{1} zi|]2,Inf] zile'
+"There're no categories in DB" : Nu există nici o categorie
+"There're no products in DB" : Nu există nici un produs
+'view all list' : vezi toată lista
+#end top 3 categories and top 6 products
+
+#page's titles translations
+'Home' : Acasă
+'New poll' : Sondaj nou
+'New category' : Categorie nouă
+'Edit category' : Modificarea categoriei
+'Category details' : Detaliile categoriei
+'Categories list' : Lista de categorii
+'Personal categories' : Categoriile personale
+"Category's products" : Produsele categoriei
+'Product loans' : Împrumutare produsului
+'Accepted loans' : Împrumut acceptat
+'Declined loans' : Împrumut declinat
+'Product details' : Detaliile produsului
+'Personal products' : Produsele personale
+'User registration' : Înregistrare utilizator
+'I forgot my password' : Am uitat parola
+'Users list' : Lista utilizatorilor
+'Edit product' : Modificarea produsului
+'Search results' : Rezultatele căutării
+'Search result' : Rezultatele căutării
+'accepted' : acceptat
+'pending' : in așteptare
+#end page's titles translations
+
+#Breadcrumbs
+'Home' : Acasă
+'Products' : Produse
+'Users' : Utilizatori
+'New category' : Categorie nouă
+#End Breadcrumbs
+
+#poll
+'New Poll' : Sondaj Nou
+'Add a new poll' : Adaugă un sondaj nou
+'Polls List' : Lista de sondaje
+'Question' : Întrebarea
+'Answers' : Răspunsurile
+'Expired At' : Expiră la
+'Publish' : Publică
+'Separate the answers with' : Separă răspunsurile prin
+'Poll List' : Lista de Sondaje
+'Edit poll' : Modificarea sondajului
+'Poll list' : Lista de sondaje
+'Poll details' : Detaliile sondajului
+'Poll Details' : Detaliile 
+'Edit Poll' : Modificarea sondajului
+'Poll' : Sondaj
+'Polls' : Lista de sondaje
+'votes': voturi
+'one vote' : un vot
+'New Poll' : Sondaj nou
+'Edit Poll': Editează sondajul
+'Vote': Votează
+#end poll
+
+#top search block translations
+'Top search' : Top căutare
+'There are no results' : Nu sunt rezultate
+#end top search block translations
+
+#access errors
+'It is necessary to login to access this page!': Este necesar de a va loga pentru a accesa pagina
+'You do not have the necessary rights to access this page!' : Nu aveti drepturi necesare pentru a accesa pagina
+#
+
+# flash message for success loan request
+'Your request was sent successfully!' : Cererea a fost trimisa cu succes!
+
+#requests on users products
+'Requests' : Cereri de împrumut
+'Requests on my products' : Cererile de împrumut ale produselor mele 
+'There are no requests on yours products' : Nu există cereri către produsele proprii
+'Recent requests' : Cererile recente
+"{1} request|]2,Inf] requests" : "{1} cerere|]2,Inf] cereri"
+#end requests on users products
+'My requests' : Cererile personale
+"My Last Requests" : Ultimele cereri personale
+"to": către
+"Your loan request expired" : Cererea de împrumut a expirat
+"accepted" : acceptat
+"returned" : restituit
+"You have successfully delete product!" : "Produsul a fost sters cu succes!"
+"Recent products": Produsele noi
+'By username' : 'Nume'
+'By products' : 'Nbr produse'
+'Popularity' : 'Numarul de imprumuturi'
+'not loaned' : 'disponibil'
+'request' : 'cerere'

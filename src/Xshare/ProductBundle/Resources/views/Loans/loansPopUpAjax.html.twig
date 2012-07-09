@@ -1,0 +1,65 @@
+{% if product|length > 0 %}
+{% set lang = app.session.getlocale() %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+<link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/loans.css') }}" type="text/css" media="all" />
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery.ui.datepicker.js"></script>
+<script type="text/javascript">
+    var dates=new Array();
+    {% for date in productLoansDates %}
+       dates.push(new Date('{{date}}'));
+    {% endfor %}
+    var period = new Array(null,null);
+    var pid    = {{pid}};
+    var lang   = '{{lang}}';
+    var dateNow    = new Date('{{date('now')|date('m/d/Y')}}');
+</script>
+<script src="{{ asset('bundles/xshareproduct/js/popupJavascriptFunctions.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block maincontent %}
+<div class="product-details">
+    <img class="fleft" src="/uploads/product/{{product.getImage()}}" width="45px" height="45px" alt="{{'Imagine Produs'|trans}}" />
+    <div class="details-body fleft">
+       <div class="details-body-padding">
+        <p><strong>{{"Product Name"|trans}}:</strong> {{product.getName()}}</p>
+        <p><strong>{{"Product Owner"|trans}}:</strong> <a target="_blanck" href="{{path('user_details',{'id':product.user.getUserId()})}}" >{{product.user.getFirstName()~" "~product.user.getLastName() }}</a></p>
+        <p><strong>{{"Added Date"|trans}}:</strong> {{product.getCreatedAt()|date("m/d/Y")}}</p>
+       </div>
+    </div>
+    <div id="selected-notempty" class="selected-period fright" style="display:none;">
+        <p>{{"Selected period"|trans}} :</p>
+        <span class="data1">-</span>
+        &nbsp;-&nbsp;
+        <span class="data2">-</span>
+    </div>
+    <div id="selected-empty" class="selected-period fright" >
+        <p>{{"Select a period"|trans}}</p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="datepicker"></div>
+<div class="success-status">
+    {{"Success"|trans}}!
+</div>
+<div class="invalid-status">
+    {{"Product are unavailable in selected period"|trans}}!
+</div>
+<div class="operation-links">
+   <ul class="fright">
+   <li class="inline-li fleft">
+    <a id="loan-accept" class="clear-form loan-buttons" href="javascript:void(0)">{%trans%}Validate{%endtrans%}</a>
+   </li>
+   <li class="inline-li fleft">
+    <a id="loan-cancel" class="clear-form loan-buttons" href="javascript:void(0)">{%trans%}Cancel{%endtrans%}</a>
+   </li>
+   <li class="clear inline-li"></li>
+  </ul>
+  <div class="clear"></div>
+</div>
+{% endblock %}
+{%endif%}

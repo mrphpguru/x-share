@@ -1,0 +1,43 @@
+        {% for product in pager.getResults %}
+           <div class="product-item">
+               <table cellspacing="0" cellpadding="0" >
+                 <tr>
+                    <td width="85%" >
+                        <div class="product-info fleft">
+                         <img src="/uploads/product/{{product.getImage()}}" width="20px" height="20px" >
+                         <a class="product-link" href="{{path('xshare_show_product',{'pid':product.getProductId()})}}" >{{product.getName()}}</a>
+                         (<a class="category-link" href="{{path('product_category_show',{'id':product.category.getCategoryId()})}}" >{{product.category.getName()}}</a>)
+                        </div>
+                        <div class="entity-added">
+                            - {% trans %}added at{% endtrans %} {{product.getCreatedAt()|date('d/m/Y')}}
+                        </div>
+                     <td width="15%" align="right" valign="middle" >
+                          {% if fromPage is sameas('userdetails') %}    
+                            &nbsp;
+                            {% if app.user is not null%}
+                                {%set sesuserid = app.user.getUserId() %}
+                                {% if product.user.getUserId() != sesuserid %}               
+                                    <a class="loan-popup-class" id="loan_popup" data-fancybox-type="ajax" href="{{path("xshare_ajax_loan",{'pid':product.getProductId})}}" ><img src="/images/request.png"></a>
+                                {%endif%} 
+                            {%else%}              
+                                <a class="loan-popup-class" href="{{path("user_registration")}}" ><img src="/images/request.png"></a>         
+                            {%endif%}
+                        {%endif%}   
+                        {% set status = product.getStatus()?"available":"loaned" %}
+                        <span class="{{status}}" title="{{status|trans}}" >&nbsp;</span>
+                        {% if fromPage is not sameas('userdetails') %}
+                            <a class="operation-links" href = "{{path('xshare_edit_product',{'pid':product.getProductId()})}}"><img alt="Edit" title="Edit" src="/images/file-icon.png"></a>
+                        {% endif %}
+                        <a class="operation-links" href = "{{path('xshare_show_product',{'pid':product.getProductId()})}}" ><img alt="Show" title="Show" src="/images/info-icon.png"></a>
+                 </tr>
+               </table>
+           </div>
+    </div>
+{% endfor %}
+{# need to modify route to work corectly! #}
+{% if pager.isPaginable %}
+<div class="pager-prod-list">
+{{ paginate(pager, 'xshare_ajax_user_porudcts_page', block_length ) }}
+</div>
+{% endif %}
+{#--end coment#}

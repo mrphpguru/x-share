@@ -1,0 +1,21 @@
+{% if requests is not empty %}
+<h5>{{"My Last Requests" | trans}}</h5>
+<ul>
+{% for request in requests %}
+    {%if request.getBookingId is not null and request.getRealReturnDate is not null%}
+        {%set class  = "returned"%}
+        {%set status = "r"%}
+    {% elseif request.getBookingId is not null%}
+        {%set class  = "accepted"%}
+        {%set status = "a"%}
+    {%else%}
+        {%set class  = "pending"%}
+        {%set status = "p"%}
+    {%endif%}
+    <li><span class="emphisize-text {{class}}">{{status}}</span> <a class="liensGray" href="{{ path('xshare_show_product', { 'pid': request.getProduct.getProductId }) }}">
+             {{request.getProduct.getNameCuted()}}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

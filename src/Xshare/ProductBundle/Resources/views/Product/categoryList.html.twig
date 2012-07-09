@@ -1,0 +1,25 @@
+<fieldset class="category-list">
+ <legend>Category List:</legend>
+    <ul class="entity-items">
+
+        {% for category in pager.getResults %}
+            <li>
+                <div class="entity-name"><a href="{{ path('product_category_edit', {'id': category.getCategoryId()}) }}">{{ category.name }}</a></div>
+                <div class="entity-added"> - {{"added at"|trans}} {{ category.createdat|date('d/m/Y') }}</div>
+                <div class="entity-unities"> - {{ category.getProducts()|length }} {{"unities"|trans}}</div>
+                <div class="entity-links">
+                    <a href="">
+                        <img src="{{ asset('images/user.png') }}"
+                    </a>
+                    <a href="">
+                        <img src="{{ asset('images/file-icon.png') }}"
+                    </a>
+                    <a href="{{ path('product_category_edit', {'id': category.getCategoryId()}) }}">
+                        <img src="{{ asset('images/info-icon.png') }}"
+                    </a>
+                </div>
+                <div class="clear"></div>
+            </li>
+        {% endfor %}
+    </ul>
+</fieldset>

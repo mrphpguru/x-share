@@ -1,0 +1,75 @@
+{% if pager.getResults|length >0 %}
+{% set lang=app.session.getlocale() %}
+<br />
+<h2>
+    {% if fromPage is sameas('userdetails') %}
+        {% trans %}User products{%endtrans%}:
+    {% else %}
+        {% trans %}My products{%endtrans%}:
+    {% endif %}
+</h2>
+<div class="category-list">
+   <div class="product-items-continer" >
+       <div id="filters-continer" class="filter fright">
+        <input type="hidden" id="Fuid" value={{ (fromPage == 'userdetails') ? userid : app.user.getUserId() }} />
+        <input type="hidden" id="Ffrom" value={{ fromPage is sameas('userdetails') ? 'userdetails' : '0' }} />
+        <a class="desc" href="javascript:void(0)" filtervalue=11 ordertype="asc" onclick="ajaxFilter(this,'{{lang}}',11,{{userid}})" >{% trans %}Date{%endtrans%}</a>
+        <span class="delimiter">&nbsp;|&nbsp;</span>
+        <a href="javascript:void(0)" filtervalue=21 ordertype="desc" onclick="ajaxFilter(this,'{{lang}}',21,{{userid}})" >{% trans %}Title{%endtrans%}</a>
+        <span class="delimiter">&nbsp;|&nbsp;</span>
+        <a href="javascript:void(0)" filtervalue=31 ordertype="desc" onclick="ajaxFilter(this,'{{lang}}',31,{{userid}})" >{% trans %}Category{%endtrans%}</a>
+    </div>
+   <div class="clear"></div>
+   <div id="product-continer-ajax" >
+        {% for product in pager.getResults %}
+           <div class="product-item">
+               <table cellspacing="0" cellpadding="0" >
+                 <tr>
+                    <td width="85%" >
+                        <div class="product-info fleft">
+                         <img src="/uploads/product/{{product.getImage()}}" width="20px" height="20px" >
+                         <a class="product-link" href="{{path('xshare_show_product',{'pid':product.getProductId()})}}" >{{product.getName()}}</a>
+                         (<a class="category-link" href="{{path('product_category_show',{'id':product.category.getCategoryId()})}}" >{{product.category.getName()}}</a>)
+                        </div>
+                        <div class="entity-added">
+                            - {% trans %}added at{% endtrans %} {{product.getCreatedAt()|date('d/m/Y')}}
+                        </div>
+                        <td width="15%" align="right" valign="middle" >
+                        {% if fromPage is sameas('userdetails') %}
+                            {% if app.user is not null%}
+                                {%set sesuserid = app.user.getUserId() %}
+                                {% if product.user.getUserId() != sesuserid %}
+                                    <a class="loan-popup-class" id="loan_popup" data-fancybox-type="ajax" href="{{path("xshare_ajax_loan",{'pid':product.getProductId()})}}" title="{{ "Loan now"|trans }}" >
+                                        <img src="{{ asset('images/request.png') }}" /></a>
+                                {%endif%}
+                            {%else%}
+                                <a class="loan-popup-class" id="loan_popup" data-fancybox-type="ajax" href="{{path("xshare_ajax_loan",{'pid':product.getProductId()})}}" title="{{ "Loan now"|trans }}" >
+                                    <img src="{{ asset('images/request.png') }}" /></a>
+                            {%endif%}
+                        {%endif%}
+                        {% if product.getEnable() %}
+                            {% set status = product.getStatus()?"available":"loaned" %}
+                        {% else %}
+                             {% set status = "disabled" %}
+                        {% endif %}
+                        <span class="{{status}}" title="{{status|trans}}" >&nbsp;</span>
+                        {% if(fromPage is not sameas('userdetails')) %}
+                            <a class="operation-links" href="{{path('xshare_edit_product',{'pid':product.getProductId()})}}"><img alt="Edit" title="Edit" src="/images/file-icon.png"></a>
+                        {% endif %}
+                            <a class="operation-links" href ="{{path('xshare_show_product',{'pid':product.getProductId()})}}" ><img alt="Show" title="Show" src="/images/info-icon.png"></a>
+                        </td>
+                 </tr>
+               </table>
+           </div>
+        {% endfor %}
+    {# need to modify route to work corectly! #}
+    {% if pager.isPaginable %}
+        <div class="pager-prod-list">
+        {{ paginate(pager, 'xshare_ajax_user_porudcts_page', block_length) }}
+        </div>
+    {% endif %}
+    {#end coment#}
+   </div>
+  </div>
+</div>
+{% endif %}

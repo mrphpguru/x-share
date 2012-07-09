@@ -1,0 +1,6 @@
+#translations for validators product's add
+product:
+  not_blank: Această valoare nu ar trebui să fie goală sau conține valori inadmisibile
+category:
+  name:
+    not_unique: Există o categorie cu acest nume deja.

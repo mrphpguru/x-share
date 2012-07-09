@@ -1,0 +1,12 @@
+{% if pager.hasResults() %}
+<h3 class="header">{{ "Requests"|trans }}</h3>
+<div id="date-DESC" class="entity-block-list">
+    <ul class="filter filter-loans fright">
+        <li id="filter-date" class="desc">{{ "Date"|trans }}</li><span class="delimiter">&nbsp;|&nbsp;</span>
+        <li id="filter-title">{{ "User name"|trans }}</li>
+    </ul>
+    <div class="clear"></div>
+    {% include 'XshareProductBundle:Product:requestsItems.html.twig' with { 'pager' : pager, 'block_length' : block_length } %}
+</div>
+<script src="{{ asset('bundles/xshareproduct/js/loans.js') }}" type="text/javascript"></script>
+{% endif %}

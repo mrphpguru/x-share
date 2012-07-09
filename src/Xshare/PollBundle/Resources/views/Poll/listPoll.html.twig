@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Poll list"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+{% endblock %}
+{% block maincontent %}
+    
+{% if polls.hasResults() %}
+<h2 class="header">{{"Polls"|trans}}</h2>    
+ <div id="categories" class="category-list">     
+    <ul class="entity-items">
+    {% for poll in polls.getResults() %}
+        <li>
+            <div class="entity-name {% if date('now') > poll.expiredat %}liensRouge{%endif%}">{{ poll.getQuestionCuted(60) }}</div>
+            <div class="entity-added">{{ poll.createdat|date('d/m/Y') }}</div>
+            <div class="entity-added"> - {{ poll.expiredat|date('d/m/Y') }}</div>
+            <div class="entity-unities"> - 
+                {% if poll.getPollResults()|length == 1 %}
+                    {{"one vote"|trans}}
+                {% else %}
+                    {{ poll.getPollResults()|length }} {{"votes"|trans}}
+                {% endif %}
+            </div>
+            <div class="entity-links">
+                <a href="{{ path('xshare_edit_poll', {'id': poll.pollid}) }}">
+                    <img src="{{ asset('images/file-icon.png') }}" />
+                </a>
+                <a href="{{ path('xshare_poll_show_details', {'id': poll.pollid}) }}">
+                    <img src="{{ asset('images/info-icon.png') }}" />
+                </a>
+            </div>
+            <div class="clear"></div>
+        </li>
+    {%endfor%}
+    </ul>
+
+    {% if polls.isPaginable %}
+    <div class="pager-polls-list">
+    {{ paginate(polls, 'xshare_poll_list', block_length ) }}
+    </div>
+    {% endif %}
+</div>         
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+<div>
+    <h5>{{"Recent products" | trans}}</h5>
+    <ul id="scrollprods">
+    {% for product in products %}
+        <li><a class="liensGray" href="{{ path('xshare_show_product', { 'pid': product.productid }) }}">
+            {% if product.name|length > 26 %}
+                 {{product.name|slice(0, 23)}}...
+            {% else %}
+                 {{product.name}}      
+            {% endif %}
+            </a>
+                <br clear="all"><br clear="all">
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<script type="text/javascript" src="{{ asset('bundles/xshareproduct/js/jquery.slider.js') }}" ></script>
+<script type="text/javascript" src="{{ asset('bundles/xshareproduct/js/product-carousel.js') }}" ></script>

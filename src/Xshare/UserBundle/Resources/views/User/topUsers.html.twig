@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Top users"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareuser/css/users.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+
+    <section class="top-users">
+        <h2 class="header">{{ "Top users"|trans }}</h2>
+        {% include 'XshareUserBundle:User:userListItems.html.twig' with { 'paginator' : paginator } %}
+        {% if paginator.isPaginable %}
+            {{ paginate(paginator, 'top_users_paged', block_length, {'page': page}) }}
+        {% endif %}
+    </section>
+    
+{% endblock %}

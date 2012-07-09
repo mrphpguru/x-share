@@ -1,0 +1,71 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "New poll"|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/xsharepoll/css/poll.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+<h2>{{'New Poll'|trans}}</h2>
+    <div class="entity-form" >
+        {% if app.session.hasFlash('rep') %}
+            <div class="product-result-notice">
+                {{ app.session.flash('rep')|trans }}
+            </div>
+        {% endif %}
+        <form action="{{ path('xshare_new_poll') }}" method="post" class="poll-form" >
+            <table class="poll-table">
+                <tr>
+                    <td width="20%">
+                        {{ form_label(form.question,"Question"|trans~":") }}
+                    </td>
+                    <td>
+                        <div class="error">{{ form_errors(form.question) }}</div>
+                        {{ form_widget(form.question) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.answers,"Answers"|trans~":") }}
+                    </td>
+                    <td>
+                        <div class="error">{{ form_errors(form.answers) }}</div>
+                        {{ form_widget(form.answers) }}
+                        <div class="poll-info">! {{"Separate the answers with"|trans}} | </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.expired_at,"Expired At"|trans~":") }}
+                    </td>
+                    <td>
+                        <div class="error">{{ form_errors(form.expired_at) }}</div>
+                        {{ form_widget(form.expired_at) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.status,"Publish"|trans~":") }}
+                    </td>
+                    <td>
+                        <div class="error">{{ form_errors(form.status) }}</div>
+                        {{ form_widget(form.status) }}
+                    </td>
+                </tr>
+            </table>
+           {{ form_rest(form) }} 
+            <div class="entity-options">
+                <input type="submit" class="save" value="{{"Save"|trans}}" />
+                <input type="reset" class="save" value="{{"Cancel"|trans}}" />
+                <div class="clear"></div>
+            </div>
+           
+        </form> 
+            <a class="fright" href="{{path("xshare_poll_list_first")}}">{{"Polls List"|trans}}</a>
+            <div class="clear"></div>
+    </div>
+  
+{% endblock %}

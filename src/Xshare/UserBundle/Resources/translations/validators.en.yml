@@ -1,0 +1,14 @@
+#translations for validators user's registration form
+user:
+  not_blank: One or more required parameters weren't introduced
+  email_invalid: Invalid e-mail
+  phone:
+    invalid: Invalid phone
+  password:
+    not_confirmed: Unconfirmed password
+  email:
+    not_unique: The user with this email already exist
+  login:
+    not_unique: The user with this username already exist
+username_invalid: Invalid username
+birth.invalid: Invalid birthdate

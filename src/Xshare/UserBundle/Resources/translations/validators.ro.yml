@@ -1,0 +1,14 @@
+#translations for validators user's registration form
+user:
+  not_blank: Unul sau mai mulți parametri obligatori nu au fost introduși corect
+  email_invalid: E-mail incorect
+  phone:
+    invalid: Telefon incorect
+  password:
+    not_confirmed: Parola nu este confirmată
+  email:
+    not_unique: Un utilizator cu acest email există deja
+  login:
+    not_unique: Un utilizator cu acest username există deja
+username_invalid: Nume utilizator incorect
+birth.invalid: Dată de naștere incorectă

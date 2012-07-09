@@ -1,0 +1,11 @@
+<div style="font-family:Arial;font-size:13px;padding:10px;background: #FCFCFC; color:#333333" >
+    <p>{% trans %}Hello{% endtrans %},<br> {% trans %}you received a message from the contact page of the site at www.x-share.com from{% endtrans %} <font style="font-weight:bold;color:#5991E6;">{{ enquiry.firstname }} {{ enquiry.lastname }}</font>.</p>
+    <b>{% trans %}Subject{% endtrans %}:</b> <i>{{ enquiry.subject }} </i>
+    <br><b>{% trans %}Content{% endtrans %}:</b>
+    <i>{{ enquiry.body }}</i>
+    <br />
+    <br><b> {% trans %}Contact{% endtrans %}:</b>
+    <br><b>Email:</b> {{ enquiry.email }}
+    <br><b>{% trans %}Phone{% endtrans %}:</b> {{ enquiry.phone }}
+    <br><br><b>{% trans %}Send date{% endtrans %}:</b> <i>{{ "now" | date("Y-m-d H:i") }}</i>
+</div>

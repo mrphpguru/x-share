@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/xshareproduct/css/category.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block maincontent %}
+    <section class="entity-show">
+        <div class="entity-image">
+            {% block entityimage %}{% endblock %}
+        </div>
+        <div class="entity-details">
+            {% block entitydetails %}{% endblock %}
+        </div>
+        <div class="clear"></div>
+        <div class="entity-options">
+            {% block entityoptions %}{% endblock %}
+        </div>
+        <div class="entity-statistics separator">
+            {% block entitystatistics %}{% endblock %}
+        </div>
+        <div class="clear"></div>
+    </section>
+    <section class="entity-additional">
+        {% block entityaddinfo %}{% endblock %}
+    </section>
+{% endblock %}
